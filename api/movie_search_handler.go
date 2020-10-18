@@ -1,10 +1,15 @@
-package main
+package api
 
-import (
-    "log"
-    "github.com/gofiber/fiber/v2"
-)
+import "github.com/gofiber/fiber"
 
-func main() {
-	app := fiber.New()
+
+func (w *WebServices)SearchMovieHandler(c *fiber.Ctx) {
+	res, err : = w.S.search.Search(MovieFilter{})
+
+	if err != nil {
+		err := fiber.NewError(400, "Cannot bring movies")
+		c.Next(err)
+	}
+
+	c.Send(res)
 }
